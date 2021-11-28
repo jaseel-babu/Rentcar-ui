@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/state_manager.dart';
+import 'package:get/get.dart';
 import 'package:two/brands.dart';
 import 'package:two/cars.dart';
+import 'package:two/detaispage.dart';
 
 class homePage extends StatefulWidget {
   homePage({Key? key}) : super(key: key);
@@ -183,7 +186,7 @@ class _homePageState extends State<homePage> {
                   ),
                 ),
                 SizedBox(
-                  height: 200,
+                  height: 250,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: cars.length,
@@ -193,14 +196,45 @@ class _homePageState extends State<homePage> {
                           borderRadius: BorderRadius.circular(30),
                         ),
                         clipBehavior: Clip.antiAlias,
-                        child: Column(
-                          children: [
-                            Image.asset(
-                              cars[ind].car,
-                              width: 150,
-                              height: 150,
+                        child: Hero(
+                          tag: Image.asset(
+                            cars[ind].car,
+                            width: 150,
+                            height: 150,
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              Get.to(() => details(
+                                    ind: ind,
+                                  ));
+                            },
+                            child: Column(
+                              children: [
+                                Image.asset(
+                                  cars[ind].car,
+                                  width: 150,
+                                  height: 150,
+                                ),
+                                Text(
+                                  cars[ind].names,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  cars[ind].price,
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.blue),
+                                )
+                              ],
                             ),
-                          ],
+                          ),
                         ),
                       );
                     },
@@ -209,6 +243,47 @@ class _homePageState extends State<homePage> {
               ],
             ),
           ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.vertical(
+            top: Radius.circular(30),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: FaIcon(
+                FontAwesomeIcons.shapes,
+                color: Colors.blue,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: FaIcon(
+                FontAwesomeIcons.bell,
+                color: Colors.black,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: FaIcon(
+                FontAwesomeIcons.save,
+                color: Colors.black,
+              ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: FaIcon(
+                FontAwesomeIcons.user,
+                color: Colors.black,
+              ),
+            )
+          ],
         ),
       ),
     );
